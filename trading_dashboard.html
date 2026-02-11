@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard - Header & Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* ===== BRAND LOGO ===== */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            opacity: 0.9;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            display: inline-block;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== MENU ITEMS ===== */
+        .menu-container {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 16px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-radius: 6px;
+        }
+
+        .menu-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .menu-link.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid white;
+        }
+
+        .menu-icon {
+            font-size: 16px;
+        }
+
+        /* ===== DROPDOWN MENU ===== */
+        .menu-item:hover > .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 18px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+            border-left-color: #667eea;
+            padding-left: 20px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* ===== USER PROFILE SECTION ===== */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-left: 20px;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .user-avatar:hover {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: white;
+            transform: scale(1.08);
+        }
+
+        /* ===== USER DROPDOWN MENU ===== */
+        .user-section:hover > .user-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            min-width: 220px;
+            margin-top: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown-section {
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .dropdown-section:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-header {
+            padding: 8px 18px;
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .dropdown-section-item {
+            display: block;
+            padding: 10px 18px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-section-item:hover {
+            background: #f5f7fa;
+            padding-left: 22px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .menu-container {
+                gap: 15px;
+            }
+
+            .menu-link {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+            }
+
+            .menu-container {
+                display: none;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .user-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .user-section {
+                gap: 8px;
+                padding-left: 10px;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: row;
+            }
+
+            .brand-logo {
+                gap: 8px;
+            }
+
+            .logo-icon {
+                font-size: 28px;
+            }
+
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <!-- BRAND LOGO -->
+        <a href="trading_dashboard.html" class="brand-logo">
+            <span class="logo-icon">📈</span>
+            <span class="logo-text">Neuro Markets</span>
+        </a>
+
+        <!-- MENU ITEMS -->
+        <ul class="menu-container">
+            <li class="menu-item">
+                <a href="dashboard.html" class="menu-link">
+                    <span class="menu-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="trading_dashboard.html" class="menu-link active">
+                    <span class="menu-icon">🏛️</span>
+                    <span>Markets</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#nifty" class="dropdown-item">NIFTY 50</a>
+                    <a href="#sensex" class="dropdown-item">SENSEX</a>
+                    <a href="#indices" class="dropdown-item">All Indices</a>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#portfolio" class="menu-link">
+                    <span class="menu-icon">💼</span>
+                    <span>Portfolio</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#holdings" class="dropdown-item">Holdings</a>
+                    <a href="#watchlist" class="dropdown-item">Watchlist</a>
+                    <a href="#performance" class="dropdown-item">Performance</a>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#orders" class="menu-link">
+                    <span class="menu-icon">📝</span>
+                    <span>Orders</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#active" class="dropdown-item">Active Orders</a>
+                    <a href="#executed" class="dropdown-item">Executed Orders</a>
+                    <a href="#cancelled" class="dropdown-item">Cancelled</a>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#research" class="menu-link">
+                    <span class="menu-icon">📚</span>
+                    <span>Research</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#reports" class="dropdown-item">Research Reports</a>
+                    <a href="#analysis" class="dropdown-item">Company Analysis</a>
+                    <a href="#news" class="dropdown-item">Market News</a>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#funds" class="menu-link">
+                    <span class="menu-icon">💰</span>
+                    <span>Funds</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#mutual" class="dropdown-item">Mutual Funds</a>
+                    <a href="#etf" class="dropdown-item">ETF</a>
+                    <a href="#goals" class="dropdown-item">Investment Goals</a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- USER PROFILE SECTION -->
+        <div class="user-section">
+            <div class="user-info">
+                <span class="user-name">John Doe</span>
+                <span class="user-role">Investor</span>
+            </div>
+            <div class="user-avatar">👤</div>
+
+            <!-- USER DROPDOWN MENU -->
+            <div class="user-dropdown-menu">
+                <div class="dropdown-section">
+                    <div class="dropdown-header">Account</div>
+                    <a href="#profile" class="dropdown-section-item">👤 My Profile</a>
+                    <a href="#settings" class="dropdown-section-item">⚙️ Settings</a>
+                    <a href="#kyc" class="dropdown-section-item">📋 KYC Status</a>
+                </div>
+
+                <div class="dropdown-section">
+                    <div class="dropdown-header">Financial</div>
+                    <a href="#statements" class="dropdown-section-item">📊 Statements</a>
+                    <a href="#documents" class="dropdown-section-item">📄 Documents</a>
+                    <a href="#tax" class="dropdown-section-item">💸 Tax Reports</a>
+                </div>
+
+                <div class="dropdown-section">
+                    <a href="#logout" class="dropdown-section-item">🚪 Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div style="max-width: 1400px; margin: 0 auto; padding: 30px 20px;">
+        <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 30px; color: #2c3e50;">📈 Market Overview</h1>
+
+        <!-- MARKET INDICES SECTION -->
+        <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 30px;">
+            <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #2c3e50;">Market Indices</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;" data-indices-container>
+                <!-- Loading... Live data will populate here -->
+                <div style="padding: 20px; text-align: center; color: #7f8c8d; grid-column: 1/-1;">⏳ Loading live market data...</div>
+            </div>
+        </div>
+
+        <!-- TOP GAINERS & LOSERS -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 30px;">
+            
+            <!-- TOP GAINERS -->
+            <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+                <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">📈 Top Gainers</h2>
+                <div style="border-top: 1px solid #ecf0f1;" data-gainers-container>
+                    <div style="padding: 12px 0; text-align: center; color: #7f8c8d;">⏳ Loading...</div>
+                </div>
+            </div>
+
+            <!-- TOP LOSERS -->
+            <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+                <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">📉 Top Losers</h2>
+                <div style="border-top: 1px solid #ecf0f1;" data-losers-container>
+                    <div style="padding: 12px 0; text-align: center; color: #7f8c8d;">⏳ Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOST ACTIVE STOCKS -->
+        <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 30px;">
+            <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">🔥 Most Active Stocks</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;" data-active-container>
+                <div style="padding: 15px; text-align: center; color: #7f8c8d; grid-column: 1/-1;">⏳ Loading...</div>
+            </div>
+        </div>
+
+        <!-- MARKET NEWS -->
+        <div style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #2c3e50;">📰 Market News</h2>
+            <div style="border-top: 1px solid #ecf0f1;">
+                <div style="padding: 15px 0; border-bottom: 1px solid #ecf0f1;">
+                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">RBI Cuts Interest Rates by 50 BPS</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 5px;">2 hours ago</div>
+                    <div style="font-size: 13px; color: #555;">The Reserve Bank of India announced a 50 basis point rate cut, easing monetary policy for economic growth.</div>
+                </div>
+                <div style="padding: 15px 0; border-bottom: 1px solid #ecf0f1;">
+                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Tech Stocks Rally on Earnings Boost</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 5px;">4 hours ago</div>
+                    <div style="font-size: 13px; color: #555;">IT sector gains 2.5% as major companies report better-than-expected quarterly earnings.</div>
+                </div>
+                <div style="padding: 15px 0; border-bottom: 1px solid #ecf0f1;">
+                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Global Markets Show Mixed Sentiment</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 5px;">6 hours ago</div>
+                    <div style="font-size: 13px; color: #555;">Asian markets edge higher on positive macro data, while European indices face headwinds.</div>
+                </div>
+                <div style="padding: 15px 0;">
+                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Commodity Prices Stabilize Post-Summit</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 5px;">8 hours ago</div>
+                    <div style="font-size: 13px; color: #555;">Oil and gold prices stabilize after international trade summit concludes.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Market API Client -->
+    <script src="market-api-client.js"></script>
+
+    <script>
+        // Initialize live data on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Initializing live market data...');
+            
+            // Start auto-refresh every 60 seconds
+            startAutoRefresh(60000);
+        });
+    </script>
+
+</body>
+</html>
